@@ -13,7 +13,7 @@ namespace Aoc2020
 
             // Read the file and display it line by line.  
             System.IO.StreamReader file =
-                new System.IO.StreamReader(@"..\input_1.txt");
+                new System.IO.StreamReader(@"..\input_1.i");
 
             List<int> numbers = new List<int>();
 
