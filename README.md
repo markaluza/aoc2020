@@ -1,2 +1,2 @@
 # aoc2020
-testovaci readme
+Advent of code 2020
