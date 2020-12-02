@@ -143,7 +143,7 @@ namespace Aoc2020
                     valid++;
             }
 
-            Console.WriteLine("Vlid passwords : {0}", valid);
+            Console.WriteLine("Valid passwords : {0}", valid);
 
         }
 
@@ -171,7 +171,7 @@ namespace Aoc2020
                     valid++;
             }
 
-            Console.WriteLine("Vlid passwords : {0}", valid);
+            Console.WriteLine("Valid passwords : {0}", valid);
 
         }
 
