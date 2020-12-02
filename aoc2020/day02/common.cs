@@ -20,7 +20,7 @@ namespace Aoc2020
         {
             string line;
 
-            // Read the file and display it line by line.  
+
             System.IO.StreamReader file =  new System.IO.StreamReader(@"..\input_2.i");
 
             List<Policy> policies = new List<Policy>();
