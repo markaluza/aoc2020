@@ -43,7 +43,6 @@ namespace Aoc2020
                 (1,2)
                 };
 
-            List<int> results = new List<int>();
             Int64 mult = -1;
 
             foreach (var s in slopes)
