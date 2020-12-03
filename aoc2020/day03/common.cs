@@ -7,9 +7,9 @@ namespace Aoc2020
     class Day3_Common
     {
 
-        private static List<string> Map = null;
+        private List<string> Map = null;
         
-        public static void LoadMap()
+        public void LoadMap()
         {
 
             if (Map != null) return;
@@ -18,7 +18,7 @@ namespace Aoc2020
             Map = new List<string>(logFile);
         }
 
-        public static bool IsTree(int x, int y)
+        public bool IsTree(int x, int y)
         {
             if (y > Map.Count)
             {
@@ -33,7 +33,7 @@ namespace Aoc2020
 
         }
 
-        public static bool IsLastLine(int y)
+        public bool IsLastLine(int y)
         {
             return y >= Map.Count;
         }
