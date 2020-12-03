@@ -45,7 +45,7 @@ namespace Aoc2020
                 (1,2)
                 };
 
-            Int64 mult = -1;
+            Int64 mult = 1;
 
             foreach (var s in slopes)
             {
@@ -62,8 +62,7 @@ namespace Aoc2020
                 }
     
                 Console.WriteLine("({0}, {1}) - Encoutered trees : {2}", s.Item1, s.Item2, trees);
-                if (mult < 0) mult = trees;
-                else mult *= trees;
+                mult *= trees;
 
             }
 
