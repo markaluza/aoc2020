@@ -69,47 +69,30 @@ namespace Aoc2020
             }
         }
 
-        static private Passport GeneratePassport(string line)
-        {
-            var items = line.Split(' ');
-            Passport pass = new Passport();
-            foreach (var item in items)
-            {
-                var it = item.Split(":");
-                if (it.Length != 2) return null;
-                pass.SetItem(it[0], it[1]);
-            } 
-            return pass;
-        }
-
         public static List<Passport> GetPassports()
         {
             List<Passport> Passports = new List<Passport>();
             var inputfile = System.IO.File.ReadAllLines(@"..\input_4.i");
 
-            string passportline = "";
+            Passport pass = new Passport();
             foreach (string line in inputfile)
             {
-                if (line.Length > 0)
-                    if (passportline.Length > 0) passportline+=" ";
-                passportline  +=  line;
-
-                if (line.Length <= 0)
+                if (string.IsNullOrEmpty(line))
                 {
-                    var pass = GeneratePassport(passportline);
-                    if (pass != null)
-                        Passports.Add(pass);
-
-                    passportline = "";
-                }
-            }
-
-            if ( passportline != "")
-            {
-                var pass = GeneratePassport(passportline);
-                if (pass != null)
                     Passports.Add(pass);
-            }      
+                    pass = new Passport();
+                    continue;
+                }
+
+                var items = line.Split(' ');
+                foreach (var item in items)
+                {
+                    var it = item.Split(":");
+                    if (it.Length != 2) return null;
+                    pass.SetItem(it[0], it[1]);
+                } 
+        
+            } 
 
             return Passports;             
 
