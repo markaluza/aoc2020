@@ -28,7 +28,7 @@ namespace Aoc2020
 
             private bool ValidItemBounds(string it, int min, int max)
             {
-                int itnmb = int.Parse(Items[it]); 
+                int itnmb = int.Parse(it); 
                 return itnmb >= min && itnmb <= max;
             }
 
@@ -39,53 +39,30 @@ namespace Aoc2020
                     return false;
                 }
 
-                if (!ValidItemBounds("byr", 1920, 2002)) return false;
-                if (!ValidItemBounds("iyr", 2010, 2020)) return false;
-                if (!ValidItemBounds("eyr", 2020, 2030)) return false;
+                if (!ValidItemBounds(Items["byr"], 1920, 2002)) return false;
+                if (!ValidItemBounds(Items["iyr"], 2010, 2020)) return false;
+                if (!ValidItemBounds(Items["eyr"], 2020, 2030)) return false;
 
-                Regex rehgt = new Regex(@"^(\d+)(cm|in)$");
-                Match resulthgt = rehgt.Match(Items["hgt"]);
+                Match resulthgt = Regex.Match(Items["hgt"], @"^(\d+)(cm|in)$");
                 if (!resulthgt.Success) 
                 {
                     return false;
                 }
-                int hgt = int.Parse(resulthgt.Groups[1].ToString());
                 switch(resulthgt.Groups[2].ToString())
                 {
                     case "cm":
-                        if (hgt < 150 || hgt > 193) 
-                        {
-                            return false;
-                        }
+                        if (!ValidItemBounds(resulthgt.Groups[1].ToString(), 150, 193)) return false;
                     break;
                     case "in":
-                        if (hgt < 59 || hgt > 76) 
-                        {
-                            return false;
-                        }
+                        if (!ValidItemBounds(resulthgt.Groups[1].ToString(), 59, 76)) return false;
                     break;
                 }
 
-                Regex rehcl = new Regex(@"^#([a-f0-9]{6})$");
-                Match resulthcl = rehcl.Match(Items["hcl"]);
-                if (!resulthcl.Success) 
-                {
-                    return false;
-                }
+                if (!Regex.Match(Items["hcl"], @"^#([a-f0-9]{6})$").Success) return false;
 
-                Regex reecl = new Regex(@"^(amb|blu|brn|gry|grn|hzl|oth)$");
-                Match resultecl = reecl.Match(Items["ecl"]);
-                if (!resultecl.Success) 
-                {
-                    return false;
-                }           
- 
-                Regex repid = new Regex(@"^([0-9]{9})$");
-                Match resultpid = repid.Match(Items["pid"]);
-                if (!resultpid.Success) 
-                {
-                    return false;
-                }
+                if (!Regex.Match(Items["ecl"], @"^(amb|blu|brn|gry|grn|hzl|oth)$").Success) return false;        
+
+                if (!Regex.Match(Items["pid"], @"^([0-9]{9})$").Success) return false;
 
                 return true;
 
