@@ -26,7 +26,7 @@ namespace Aoc2020
                     Items.ContainsKey("pid");
             }
 
-            private bool ValidItemBounds(string it, int min, int max)
+            private bool ValidateBounds(string it, int min, int max)
             {
                 int itnmb = int.Parse(it); 
                 return itnmb >= min && itnmb <= max;
@@ -40,9 +40,9 @@ namespace Aoc2020
                 }
 
                 if (
-                    !ValidItemBounds(Items["byr"], 1920, 2002) ||
-                    !ValidItemBounds(Items["iyr"], 2010, 2020) ||
-                    !ValidItemBounds(Items["eyr"], 2020, 2030)) 
+                    !ValidateBounds(Items["byr"], 1920, 2002) ||
+                    !ValidateBounds(Items["iyr"], 2010, 2020) ||
+                    !ValidateBounds(Items["eyr"], 2020, 2030)) 
                     return false;
 
                 Match resulthgt = Regex.Match(Items["hgt"], @"^(\d+)(cm|in)$");
@@ -57,10 +57,10 @@ namespace Aoc2020
                 switch(resulthgt.Groups[2].ToString())
                 {
                     case "cm":
-                        if (!ValidItemBounds(resulthgt.Groups[1].ToString(), 150, 193)) return false;
+                        if (!ValidateBounds(resulthgt.Groups[1].ToString(), 150, 193)) return false;
                     break;
                     case "in":
-                        if (!ValidItemBounds(resulthgt.Groups[1].ToString(), 59, 76)) return false;
+                        if (!ValidateBounds(resulthgt.Groups[1].ToString(), 59, 76)) return false;
                     break;
                 }                     
 
@@ -74,7 +74,7 @@ namespace Aoc2020
             List<Passport> Passports = new List<Passport>();
 
             var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"..\input_4.i"));
-            inputfile.Add("");
+            inputfile.Add(""); // at se tam prida i posledni
 
             Passport pass = new Passport();
             foreach (string line in inputfile)
