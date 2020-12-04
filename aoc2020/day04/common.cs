@@ -39,15 +39,21 @@ namespace Aoc2020
                     return false;
                 }
 
-                if (!ValidItemBounds(Items["byr"], 1920, 2002)) return false;
-                if (!ValidItemBounds(Items["iyr"], 2010, 2020)) return false;
-                if (!ValidItemBounds(Items["eyr"], 2020, 2030)) return false;
+                if (
+                    !ValidItemBounds(Items["byr"], 1920, 2002) ||
+                    !ValidItemBounds(Items["iyr"], 2010, 2020) ||
+                    !ValidItemBounds(Items["eyr"], 2020, 2030)) 
+                    return false;
 
                 Match resulthgt = Regex.Match(Items["hgt"], @"^(\d+)(cm|in)$");
-                if (!resulthgt.Success) 
-                {
-                    return false;
-                }
+
+                if (
+                    !Regex.Match(Items["hcl"], @"^#([a-f0-9]{6})$").Success ||
+                    !Regex.Match(Items["ecl"], @"^(amb|blu|brn|gry|grn|hzl|oth)$").Success || 
+                    !Regex.Match(Items["pid"], @"^([0-9]{9})$").Success ||
+                    !resulthgt.Success)
+                     return false;
+
                 switch(resulthgt.Groups[2].ToString())
                 {
                     case "cm":
@@ -56,13 +62,7 @@ namespace Aoc2020
                     case "in":
                         if (!ValidItemBounds(resulthgt.Groups[1].ToString(), 59, 76)) return false;
                     break;
-                }
-
-                if (!Regex.Match(Items["hcl"], @"^#([a-f0-9]{6})$").Success) return false;
-
-                if (!Regex.Match(Items["ecl"], @"^(amb|blu|brn|gry|grn|hzl|oth)$").Success) return false;        
-
-                if (!Regex.Match(Items["pid"], @"^([0-9]{9})$").Success) return false;
+                }                     
 
                 return true;
 
