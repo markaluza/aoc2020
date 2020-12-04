@@ -72,7 +72,9 @@ namespace Aoc2020
         public static List<Passport> GetPassports()
         {
             List<Passport> Passports = new List<Passport>();
-            var inputfile = System.IO.File.ReadAllLines(@"..\input_4.i");
+
+            var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"..\input_4.i"));
+            inputfile.Add("");
 
             Passport pass = new Passport();
             foreach (string line in inputfile)
