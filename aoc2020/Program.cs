@@ -16,7 +16,9 @@ namespace Aoc2020
             //Day3.Task1();
             //Day3.Task2();
             //Day4.Task1();
-            Day4.Task2();
+            //Day4.Task2();
+            //Day5.Task1();
+            Day5.Task2();
 
             Console.ReadKey();
             return;
