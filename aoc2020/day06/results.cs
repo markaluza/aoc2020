@@ -10,7 +10,7 @@ namespace Aoc2020
         {
             Console.WriteLine("AOC2020_Day6_Task1");
 
-            var groups = Day6_Common.GetGroups();
+            var groups = Day6_Common.GetGroups(Day6_Common.SetOp.Union);
 
             int count = 0;
             foreach (var group in groups)
@@ -25,7 +25,7 @@ namespace Aoc2020
             Console.WriteLine("AOC2020_Day6_Task2");
   
 
-            var groups = Day6_Common.GetGroups2();
+            var groups = Day6_Common.GetGroups(Day6_Common.SetOp.Intersect);
 
             int count = 0;
             foreach (var group in groups)
