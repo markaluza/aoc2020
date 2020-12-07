@@ -10,8 +10,6 @@ namespace Aoc2020
         {
             Console.WriteLine("AOC2020_Day5_Task1");
 
-            var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"..\input_5.i"));
-
             var ids = Day5_Common.GetSeatIds();
             int maxseatId = 0;
             foreach (var seatId in ids)
