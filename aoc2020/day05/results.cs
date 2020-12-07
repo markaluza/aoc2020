@@ -31,7 +31,7 @@ namespace Aoc2020
             for (int i =0; i < 1024; i++) occupied[i] = false;
             foreach (var seatid in ids) occupied[seatid] = true;
 
-            for (int i =1; i < 1024; i++)
+            for (int i =1; i < 1024 -1; i++)
             {
                 if (occupied[i-1] && !occupied[i] && occupied[i+1]) 
                 {
