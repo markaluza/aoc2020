@@ -11,7 +11,7 @@ namespace Aoc2020
             string line;
 
             System.IO.StreamReader file =
-                new System.IO.StreamReader(@"..\input_1.i");
+                new System.IO.StreamReader(@"./day01/input.txt");
 
             List<int> numbers = new List<int>();
 

@@ -8,7 +8,7 @@ namespace Aoc2020
     {
         public static List<int> GetSeatIds()
         {
-            var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"..\input_5.i"));
+            var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"./day05/input.txt"));
 
             List<int> ids = new List<int>();
 

@@ -73,7 +73,7 @@ namespace Aoc2020
         {
             List<Passport> Passports = new List<Passport>();
 
-            var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"..\input_4.i"));
+            var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"./day04/input.txt"));
             inputfile.Add(""); // at se tam prida i posledni
 
             Passport pass = new Passport();

@@ -15,7 +15,7 @@ namespace Aoc2020
 
         public static List<HashSet<char>> GetGroups(SetOp op)
         {
-            var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"..\input_6.i"));
+            var inputfile =  new List<string>(System.IO.File.ReadAllLines(@"./day06/input.txt"));
             inputfile.Add("");
 
             List<HashSet<char>> groups = new List<HashSet<char>>();

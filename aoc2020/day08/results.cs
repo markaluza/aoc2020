@@ -11,7 +11,7 @@ namespace Aoc2020
             Console.WriteLine("AOC2020_Day8_Task1");
 
             var comp = new Computer();
-            var program = comp.LoadProgram(@"..\input_8.i");
+            var program = comp.LoadProgram(@"./day08/input.txt");
 
             comp.Execute(program);
 
@@ -26,7 +26,7 @@ namespace Aoc2020
 
             var comp = new Computer();
 
-            var prog = comp.LoadProgram(@"..\input_8.i");
+            var prog = comp.LoadProgram(@"./day08/input.txt");
 
             for (int i =0; i < prog.Count; i++)
             {

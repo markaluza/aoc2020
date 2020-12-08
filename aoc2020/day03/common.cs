@@ -14,7 +14,7 @@ namespace Aoc2020
 
             if (Map != null) return;
 
-            var logFile = System.IO.File.ReadAllLines(@"..\input_3.i");
+            var logFile = System.IO.File.ReadAllLines(@"./day03/input.txt");
             Map = new List<string>(logFile);
         }
 

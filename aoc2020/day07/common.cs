@@ -12,7 +12,7 @@ namespace Aoc2020
         static public Dictionary<string, Dictionary<string, int>> GetRules()
         {
             var Rules  = new Dictionary<string, Dictionary<string, int>>();
-            var lines =  new List<string>(System.IO.File.ReadAllLines(@"..\input_7.i"));
+            var lines =  new List<string>(System.IO.File.ReadAllLines(@"./day07/input.txt"));
 
             foreach (var line in lines)           
             {
