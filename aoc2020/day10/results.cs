@@ -55,14 +55,17 @@ namespace Aoc2020
                 }
                 else
                 {
+                    int combinations = 1;
+
                     switch(nmbs)
                     {
                         case 0: break;
-                        case 1: mult *=2; break;
-                        case 2: mult *=4; break;
-                        case 3: mult *=7; break;
+                        case 1: combinations = 2; break;
+                        case 2: combinations = 4; break;
+                        case 3: combinations = 7; break;
                         default: throw new Exception("dopsat...");
-                    }                    
+                    }       
+                    mult *= combinations;             
                     nmbs = 0;
                 }
             } 
