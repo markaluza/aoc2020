@@ -45,7 +45,7 @@ namespace Aoc2020
             var input = GetInput();
 
             int nmbs = 0;
-            Int64 mult = 1;
+            Int64 combinations = 1;
 
             for (int i= 1; i < input.Count -1; i++)
             {
@@ -55,21 +55,19 @@ namespace Aoc2020
                     continue;
                 }
 
-                int combinations = 1;
                 switch(nmbs)
                 {
                     case 0: break;
-                    case 1: combinations = 2; break;
-                    case 2: combinations = 4; break;
-                    case 3: combinations = 7; break;
+                    case 1: combinations *= 2; break;
+                    case 2: combinations *= 4; break;
+                    case 3: combinations *= 7; break;
                     default: throw new Exception("dopsat...");
-                }       
-                mult *= combinations;             
+                }               
                 nmbs = 0;
                 
             } 
 
-            Console.WriteLine("mult : {0}",  mult);
+            Console.WriteLine("mult : {0}",  combinations);
         }        
 
     }
