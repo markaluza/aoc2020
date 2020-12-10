@@ -6,12 +6,12 @@ namespace Aoc2020
     class Day1_Common
     {
 
-        public static List<int> GetInput()
+        public static List<int> GetIntInput(string sfile)
         {
             string line;
 
             System.IO.StreamReader file =
-                new System.IO.StreamReader(@"./day01/input.txt");
+                new System.IO.StreamReader(sfile);
 
             List<int> numbers = new List<int>();
 
@@ -22,6 +22,11 @@ namespace Aoc2020
 
             }
             return numbers;
+        }
+
+        public static List<int> GetInput()
+        {
+            return GetIntInput(@"./day01/input.txt");
         }
 
     }

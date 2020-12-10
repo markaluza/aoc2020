@@ -41,7 +41,8 @@ namespace Aoc2020
 
         public static void Task2()
         {
-          Console.WriteLine("AOC2020_Day9_Task2");
+          
+            Console.WriteLine("AOC2020_Day9_Task2");
 
             var input = Day9_Common.GetInput();
 
