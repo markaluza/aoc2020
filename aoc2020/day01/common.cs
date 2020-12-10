@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Aoc2020
 {
@@ -8,13 +9,7 @@ namespace Aoc2020
 
         public static List<int> GetIntInput(string sfile)
         {
-
-            List<int> numbers = new List<int>();    
-            var lines = System.IO.File.ReadAllLines(sfile);
-
-            foreach(var line in lines) numbers.Add(int.Parse(line));
-
-            return numbers;
+            return System.IO.File.ReadAllLines(sfile).Select(int.Parse).ToList();
         }
 
         public static List<int> GetInput()
