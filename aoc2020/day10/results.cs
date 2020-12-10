@@ -52,22 +52,21 @@ namespace Aoc2020
                 if (input[i+1] - input[i-1] == 2)
                 {
                     nmbs++;
+                    continue;
                 }
-                else
-                {
-                    int combinations = 1;
 
-                    switch(nmbs)
-                    {
-                        case 0: break;
-                        case 1: combinations = 2; break;
-                        case 2: combinations = 4; break;
-                        case 3: combinations = 7; break;
-                        default: throw new Exception("dopsat...");
-                    }       
-                    mult *= combinations;             
-                    nmbs = 0;
-                }
+                int combinations = 1;
+                switch(nmbs)
+                {
+                    case 0: break;
+                    case 1: combinations = 2; break;
+                    case 2: combinations = 4; break;
+                    case 3: combinations = 7; break;
+                    default: throw new Exception("dopsat...");
+                }       
+                mult *= combinations;             
+                nmbs = 0;
+                
             } 
 
             Console.WriteLine("mult : {0}",  mult);
