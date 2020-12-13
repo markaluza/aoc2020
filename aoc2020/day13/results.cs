@@ -10,6 +10,7 @@ namespace Aoc2020
 
         public static void Task1()
         {
+
             
             Console.WriteLine("AOC2020_Day13_Task1");
 
@@ -17,11 +18,11 @@ namespace Aoc2020
 
             long initttime = long.Parse(lines[0]);
             
-            var buses = lines[1].Split(",");
 
             var minwaittime = long.MaxValue;
             long res = 0;
 
+            var buses = lines[1].Split(",");
             foreach(var sbus in buses)
             {
                 if (sbus == "x") continue;
@@ -47,8 +48,35 @@ namespace Aoc2020
 
             var lines = new List<string>(System.IO.File.ReadAllLines(@"./day13/input.txt"));
 
+            var sbuses = lines[1].Split(",");
+            
+            var valpos = new List<(long, long)>();
 
-           // Console.WriteLine("Manhatan Distance {0}", ship.x + ship.y);
+            for (int i =0; i < sbuses.Length; i++)
+            {
+                if (sbuses[i] == "x") continue;
+                valpos.Add((int.Parse(sbuses[i]), i));
+            }
+
+
+            long time = valpos[0].Item1;
+            long jump = time;
+
+            for (int i =1; i < valpos.Count; i++)
+            {
+                long next = valpos[i].Item1;
+                long offset = valpos[i].Item2;
+
+                while ((time + offset) % next !=0)
+                    time += jump;
+
+                jump *= next;
+
+            }
+
+            Console.WriteLine("Time : {0}", time);
+
+            
             
         }
 
