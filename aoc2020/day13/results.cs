@@ -60,7 +60,7 @@ namespace Aoc2020
 
 
             long time = valpos[0].Item1;
-            long jump = time;
+            long mult = time;
 
             for (int i =1; i < valpos.Count; i++)
             {
@@ -68,9 +68,10 @@ namespace Aoc2020
                 long offset = valpos[i].Item2;
 
                 while ((time + offset) % next !=0)
-                    time += jump;
+                    time += mult;
 
-                jump *= next;
+                // nezajimam se kolikrat je tam nasobek cisel ktera uz jsem spocital dulezite jsou modula a ty zustavaji...
+                mult *= next;
 
             }
 

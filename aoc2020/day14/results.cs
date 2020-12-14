@@ -140,9 +140,9 @@ namespace Aoc2020
                         {
                             switch(curmask[j])
                             {
-                                case '0': break;                                               // ponecham
+                                case '0': break;                     // ponecham
                                 case '1': tmpaddr[j] = '1'; break;   // prehodim
-                                case 'X': tmpaddr[j] = iaddr[iaddr.Length -1 - xno]; xno++; break;
+                                case 'X': tmpaddr[j] = iaddr[iaddr.Length -1 - xno]; xno++; break; // x-té ixko nahradim 
                             }
                         }
 
