@@ -27,17 +27,17 @@ namespace Aoc2020
             var dict = ReadInput();       
 
             int searchnmb = 0;
-            for (int i = dict.Count; i < lastturn - 1; i++)
+            for (int i = dict.Count + 1; i < lastturn; i++)
             {
                 if (dict.ContainsKey(searchnmb))
                 {
-                    int diff = i+1 - dict[searchnmb];
-                    dict[searchnmb] = i+1;
+                    int diff = i - dict[searchnmb];
+                    dict[searchnmb] = i;
                     searchnmb = diff;
                 }
                 else
                 {
-                    dict.Add(searchnmb, i+1);
+                    dict.Add(searchnmb, i);
                     searchnmb = 0;
                 }
             }
