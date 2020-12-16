@@ -236,7 +236,7 @@ namespace Aoc2020
                         foreach (var dd in dict)
                         {
                             dd.Value.Remove(copy.Min);
-                        }
+                        } 
                     }
                 }
             }
