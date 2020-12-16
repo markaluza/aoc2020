@@ -20,27 +20,50 @@ namespace Aoc2020
             
             public Interval Interval1, Interval2;
 
+            public bool ValidNumber(int nmb)
+            {
+                return nmb >= Interval1.From && nmb <= Interval1.To ||
+                        nmb >= Interval2.From && nmb <= Interval2.To;
+            }
+
             public bool ValidTicket(Ticket ticket, ref SortedSet<int> badnumbers)
             {
                 foreach(var nmb in ticket)
                 {
-                    if (!(
-                        nmb >= Interval1.From && nmb <= Interval1.To ||
-                        nmb >= Interval2.From && nmb <= Interval2.To))
-                        {
-                            badnumbers.Add(nmb);
-                        }
+                    if (!ValidNumber(nmb))
+                    {
+                        badnumbers.Add(nmb);
+                    }
                 }
 
                 return badnumbers.Count == 0;
 
-            }
+            } 
 
         }
 
         static List<Rule> Rules = new List<Rule>();
 
-        class Ticket : List<int> {};
+        class Ticket : List<int> 
+        {
+
+            public void AvailableRules(List<Rule> rules, ref SortedSet<string> ret)
+            {
+                ret.Clear();
+
+                for (int nmb = 0; nmb < Count; nmb++)
+                {
+                    foreach(var rule in rules)
+                    {
+
+                        if (rule.ValidNumber(this[nmb]))
+                        {
+                            ret.Add(string.Format("{0} {1}", rule.Name, nmb+1));
+                        }
+                    }
+                }
+            }
+        }
 
         static Ticket MyTicket = null;
 
@@ -95,15 +118,19 @@ namespace Aoc2020
         }
 
 
-        public static void Task1()
+        public static void Task12()
         {
 
-            Console.WriteLine("AOC2020_Day16_Task1");   
+            Console.WriteLine("AOC2020_Day16_Task12");   
 
             LoadInput();
 
             var invalid = new List<int>();
-            int valtickets = 0;
+
+            SortedSet<string> rulepositions = null;
+
+            //NearbyTickets.Add(MyTicket);
+
             foreach(var ticket in NearbyTickets)
             {
                 SortedSet<int> invalidnmbs = null; //new ;
@@ -113,22 +140,44 @@ namespace Aoc2020
                     if (rule.ValidTicket(ticket, ref invalidrulenmbs))
                     {
                         invalidnmbs = null;
-                        valtickets++;
                         break;
                     }
                     else
                     {
                         if (invalidnmbs == null)
                         {
-                            invalidnmbs = new SortedSet<int>(invalidrulenmbs);
+                            invalidnmbs = invalidrulenmbs;
                         }
-                        invalidnmbs.IntersectWith(invalidrulenmbs);
+                        else
+                        {
+                            invalidnmbs.IntersectWith(invalidrulenmbs);
+                        }
+                        
                     }
                 }
-                if (invalidnmbs != null)
+                // neplatny ticket
+                if (invalidnmbs != null && invalidnmbs.Count > 0)
                 {
+
                     foreach(var inv in invalidnmbs)
                         invalid.Add(inv);
+
+                }
+                // platny ticket
+                else
+                {
+                    var actrulpos = new SortedSet<string>();
+                    ticket.AvailableRules(Rules, ref actrulpos);
+
+                    if (rulepositions == null)
+                    {
+                        rulepositions = actrulpos;
+                    }
+                    else
+                    {
+                        rulepositions.IntersectWith(actrulpos);
+                    }
+
                 }
             }
 
@@ -138,16 +187,60 @@ namespace Aoc2020
                 sum += inv;
             }
 
-            Console.WriteLine("Sum : {0}", sum); 
+            Console.WriteLine("Task1 Sum : {0}", sum); 
 
+
+            var dict = new Dictionary<string, SortedSet<int>>();
+
+            foreach(var rule in rulepositions)
+            {
+                Match res2 = Regex.Match(rule,
+                        @"(.+) (\d+)$"
+                    );
+                if (!res2.Success) throw new Exception();
+                string name = res2.Groups[1].ToString();
+                int pos = int.Parse(res2.Groups[2].ToString());
+
+                if (!dict.ContainsKey(name)) dict.Add(name, new SortedSet<int>());
+                dict[name].Add(pos);
+
+            }
+            
+            long mult = 1;
+            while(dict.Count > 0)
+            {
+                foreach(var d in dict)
+                {
+
+                    var copy = new SortedSet<int>(d.Value);
+
+                    foreach (var d2 in dict)
+                    {
+                        if (d.Key == d2.Key) continue;
+
+                        copy.ExceptWith(d2.Value);
+                    }
+
+                    if (copy.Count == 1)
+                    {
+                        if (d.Key.StartsWith("departure"))
+                        {
+                            int mynmb = MyTicket[copy.Min-1]; 
+                            Console.WriteLine("{0} : {1} - {2}", d.Key, copy.Min, mynmb ); 
+                            mult *= mynmb;
+
+                        }
+
+                        dict.Remove(d.Key);
+                        
+                        foreach (var dd in dict)
+                        {
+                            dd.Value.Remove(copy.Min);
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Task2 :Mult {0}", mult); 
         }
-
-        public static void Task2()
-        {
-
-            Console.WriteLine("AOC2020_Day16_Task2");
-
-        }
-
     }
 }
