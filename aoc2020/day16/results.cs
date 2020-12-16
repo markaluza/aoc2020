@@ -92,7 +92,7 @@ namespace Aoc2020
             {
                 // type: 50-635 or 642-966
                 Match res2 = Regex.Match(rule,
-                        @"(.+): (\d+)-(\d+) or (\d+)-(\d+)*$"
+                        @"(.+): (\d+)-(\d+) or (\d+)-(\d+)$"
                     );
                 if (!res2.Success) throw new Exception();
                 
