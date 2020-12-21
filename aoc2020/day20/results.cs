@@ -9,8 +9,8 @@ namespace Aoc2020
     {
         public int TileNum = -1;
 
-        public List<int> Nmbs1 = new List<int>();
-        public List<int> Nmbs2 = new List<int>();
+        public List<int> Nmbs = new List<int>();
+        public List<int> NmbsRev = new List<int>();
 
         public static string ReverseString( string s )
         {
@@ -38,21 +38,21 @@ namespace Aoc2020
             string t= lines[1];
             string b = lines[lines.Length -1];
 
-            for(int j =1 ; j < lines.Length; j++)
+            for(int j =1 ; j < lines[j].Length; j++)
             {
                 l += lines[j][0];
                 r += lines[j][lines[j].Length -1];
             }
 
-            Nmbs1.Add(GetSideNumber(t));
-            Nmbs1.Add(GetSideNumber(r));
-            Nmbs1.Add(GetSideNumber(b));
-            Nmbs1.Add(GetSideNumber(l));
+            Nmbs.Add(GetSideNumber(t));
+            Nmbs.Add(GetSideNumber(r));
+            Nmbs.Add(GetSideNumber(b));
+            Nmbs.Add(GetSideNumber(l));
 
-            Nmbs2.Add(GetSideNumber(ReverseString( t)));
-            Nmbs2.Add(GetSideNumber(ReverseString( r)));
-            Nmbs2.Add(GetSideNumber(ReverseString( b)));
-            Nmbs2.Add(GetSideNumber(ReverseString( l)));     
+            NmbsRev.Add(GetSideNumber(ReverseString(t)));
+            NmbsRev.Add(GetSideNumber(ReverseString(r)));
+            NmbsRev.Add(GetSideNumber(ReverseString(b)));
+            NmbsRev.Add(GetSideNumber(ReverseString(l)));     
 
 
         }
@@ -61,11 +61,13 @@ namespace Aoc2020
 
     class TileList : List<Tile>
     {
+
+        public Dictionary<int, List<Tile>> nmbs = new  Dictionary<int, List<Tile>>();
         
         public void Load()
         {
 
-            var lines = System.IO.File.ReadAllText(@"./day20/input_test.txt");
+            var lines = System.IO.File.ReadAllText(@"./day20/input.txt");
             var tiles = lines.Split("\r\n\r\n");
 
             foreach(var tiledata in tiles)
@@ -73,6 +75,27 @@ namespace Aoc2020
                 Tile t = new Tile();
                 t.SetData(tiledata);
                 Add(t);
+
+                foreach(var nmb in t.Nmbs)
+                {
+                    if (!nmbs.ContainsKey(nmb))
+                    {
+                        nmbs.Add(nmb, new List<Tile>());
+                    }
+
+                    nmbs[nmb].Add(t);
+                }
+
+                foreach(var nmb in t.NmbsRev)
+                {
+                    if (!nmbs.ContainsKey(nmb))
+                    {
+                        nmbs.Add(nmb, new List<Tile>());
+                    }
+
+                    nmbs[nmb].Add(t);
+                }
+
             }
 
         }
@@ -88,16 +111,7 @@ namespace Aoc2020
 
         }
 
-        /*List<Tile> GetAvailableTilesWithNmb()
-        {
-            
-            List<Tile>
-
-        }
-        */
-
     }
-
 
 
     class Day20
@@ -110,6 +124,23 @@ namespace Aoc2020
 
             TileList list = new TileList();
             list.Load();
+
+            /*
+            foreach(var nmbs in list.nmbs)
+            {
+                Console.Write("{0} - ", nmbs.Key);
+                foreach(var nmb in nmbs.Value)
+                {
+                    Console.Write("{0}, ", nmb.TileNum);
+                }
+                if (nmbs.Value.Count == 1)
+                {
+                    unique++;
+                }
+                Console.WriteLine();
+            }
+            */
+
 
                         
 
