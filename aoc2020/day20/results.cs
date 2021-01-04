@@ -42,7 +42,7 @@ namespace Aoc2020
 
         }
 
-        bool ContainsSide(string side)
+        public bool ContainsSide(string side)
         {
             return Sides.Contains(side) || Sides.Contains(ReverseString(side));
         }
@@ -73,8 +73,6 @@ namespace Aoc2020
 
     class TileList : List<Tile>
     {
-
-        public Dictionary<int, List<Tile>> nmbs = new  Dictionary<int, List<Tile>>();
         
         public void Load()
         {
@@ -101,6 +99,24 @@ namespace Aoc2020
             return foo;
 
         }
+
+        Tile FindTileBySide(string side)
+        {
+            foreach(var tile in this)
+                if (tile.ContainsSide(side))
+                    return tile;
+
+            return null;
+        }
+
+        Tile GetTileByNum(int TileNum)
+        {
+            foreach(var tile in this)
+                if (tile.TileNum == TileNum)
+                    return tile;
+
+            return null;
+        } 
 
     }
 
@@ -146,11 +162,10 @@ namespace Aoc2020
 
             Console.WriteLine("AOC2020_Day20_2"); 
 
-
-            TileList list = new TileList();
-            list.Load();
-
-            Console.WriteLine("Not ready yet");
+           // TileList list = new TileList();
+            //list.Load();
+                        
+            Console.WriteLine("TODO...");
 
         }        
 
