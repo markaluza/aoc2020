@@ -9,22 +9,13 @@ namespace Aoc2020
     {
         public int TileNum = -1;
 
-        public List<int> Nmbs = new List<int>();
-        public List<int> NmbsRev = new List<int>();
+        public List<string> Sides = new List<string>();
 
         public static string ReverseString( string s )
         {
             char[] charArray = s.ToCharArray();
             Array.Reverse( charArray );
             return new string( charArray );
-        }
-
-        int GetSideNumber(string line)
-        {
-            line = line.Replace(".", "0");
-            line = line.Replace("#", "1");
-
-            return Convert.ToInt32(line, 2);
         }
 
         public void SetData(string tiledata)
@@ -35,26 +26,47 @@ namespace Aoc2020
 
             string l = "";
             string r = "";
-            string t= lines[1];
+            string t = lines[1];
             string b = lines[lines.Length -1];
 
-            for(int j =1 ; j < lines[j].Length; j++)
+            for(int j =1 ; j < lines.Length; j++)
             {
                 l += lines[j][0];
                 r += lines[j][lines[j].Length -1];
             }
 
-            Nmbs.Add(GetSideNumber(t));
-            Nmbs.Add(GetSideNumber(r));
-            Nmbs.Add(GetSideNumber(b));
-            Nmbs.Add(GetSideNumber(l));
+            Sides.Add(t);
+            Sides.Add(r);
+            Sides.Add(b);
+            Sides.Add(l);             
 
-            NmbsRev.Add(GetSideNumber(ReverseString(t)));
-            NmbsRev.Add(GetSideNumber(ReverseString(r)));
-            NmbsRev.Add(GetSideNumber(ReverseString(b)));
-            NmbsRev.Add(GetSideNumber(ReverseString(l)));     
+        }
 
+        bool ContainsSide(string side)
+        {
+            return Sides.Contains(side) || Sides.Contains(ReverseString(side));
+        }
 
+        public int GetPossibleNeighbours(TileList list, out TileList output)
+        {
+
+            output = new TileList();
+
+            foreach(var tile in list)
+            {
+                if (TileNum == tile.TileNum) continue;
+
+                foreach (var side in Sides)
+                {
+                    if (tile.ContainsSide(side)) 
+                    {
+                        if (!output.Contains(tile))
+                            output.Add(tile);
+                    }
+                }
+                
+            }
+            return output.Count;
         }
 
     }
@@ -75,27 +87,6 @@ namespace Aoc2020
                 Tile t = new Tile();
                 t.SetData(tiledata);
                 Add(t);
-
-                foreach(var nmb in t.Nmbs)
-                {
-                    if (!nmbs.ContainsKey(nmb))
-                    {
-                        nmbs.Add(nmb, new List<Tile>());
-                    }
-
-                    nmbs[nmb].Add(t);
-                }
-
-                foreach(var nmb in t.NmbsRev)
-                {
-                    if (!nmbs.ContainsKey(nmb))
-                    {
-                        nmbs.Add(nmb, new List<Tile>());
-                    }
-
-                    nmbs[nmb].Add(t);
-                }
-
             }
 
         }
@@ -125,27 +116,44 @@ namespace Aoc2020
             TileList list = new TileList();
             list.Load();
 
-            /*
-            foreach(var nmbs in list.nmbs)
+            long mult = 1;
+            foreach(var tile in list)
             {
-                Console.Write("{0} - ", nmbs.Key);
-                foreach(var nmb in nmbs.Value)
+                TileList output = null;
+                int neighbours = tile.GetPossibleNeighbours(list, out output);
+                if (neighbours == 2 )
                 {
-                    Console.Write("{0}, ", nmb.TileNum);
+                    Console.Write("tile : {0} - {1} - ", tile.TileNum, neighbours); 
+                    
+                    foreach(var neighbour in output)
+                    {
+                        TileList output2= null;
+                        int cnt = neighbour.GetPossibleNeighbours(list,out output2);
+                        Console.Write("{0}({1}), ", neighbour.TileNum, cnt); 
+                    }
+
+                    mult *= tile.TileNum;
+
+                    Console.WriteLine("");
                 }
-                if (nmbs.Value.Count == 1)
-                {
-                    unique++;
-                }
-                Console.WriteLine();
             }
-            */
-
-
                         
-
+            Console.WriteLine("Mult : {0}", mult);
         }
 
+        public static void Task2()
+        {
+
+            Console.WriteLine("AOC2020_Day20_2"); 
+
+
+            TileList list = new TileList();
+            list.Load();
+
+            Console.WriteLine("Not ready yet");
+
+        }        
 
     }
+
 }
