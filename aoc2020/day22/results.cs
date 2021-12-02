@@ -164,9 +164,6 @@ namespace Aoc2020
 
             CardReader.ReadCards(out Player1, out Player2);
 
-            List<byte> Player1orig = new List<byte>(Player1);
-            List<byte> Player2orig = new List<byte>(Player2);
-
             var winner = RecursiveGame(Player1, Player2);
             Console.WriteLine("Game {0} - Winner = {1}", gameno, winner );
 

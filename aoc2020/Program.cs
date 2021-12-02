@@ -8,7 +8,7 @@ namespace Aoc2020
 
         static void Main(string[] args)
         {
-            Day22.Task2();
+            Day23.Task1();
             Console.ReadKey();
             return;
 
