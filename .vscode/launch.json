@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/aoc2020/bin/Debug/net5.0/aoc2020.dll",
+            "program": "${workspaceFolder}/aoc2020/bin/Debug/net6.0/aoc2020.dll",
             "args": [],
             "cwd": "${workspaceFolder}/aoc2020",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
